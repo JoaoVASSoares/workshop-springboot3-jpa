@@ -13,6 +13,8 @@ import com.joaovitor.curso.repositories.UserRepository;
 import com.joaovitor.curso.services.exceptions.DatabaseException;
 import com.joaovitor.curso.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UserService {
 	
@@ -50,8 +52,7 @@ public class UserService {
 		updateData(entity, obj);
 		return repository.save(entity);
 		}
-		catch(RuntimeException e) {
-			e.printStackTrace();
+		catch(EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
 		}
 	}
